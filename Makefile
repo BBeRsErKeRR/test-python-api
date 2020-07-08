@@ -2,7 +2,7 @@
 venv:
 	virtualenv venv
 
-tests: venv
+test: venv
 	venv/bin/pip install -r requirements/test.txt
 	venv/bin/python -B -m pytest --flake8 --cov-report=xml
 	venv/bin/bandit --verbose --exclude venv,tests --recursive
