@@ -4,8 +4,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-@api.route("/", methods=["GET"])
-def home():
+@api.route("/hello", methods=["GET"])
+def hello():
     logger.info("test log statement")
     logger.info(
         "test log statement with extra props",
@@ -22,4 +22,3 @@ def exception():
         logger.error("Error occurred", exc_info=e)
         logger.exception("Error occurred", exc_info=e)
     return "Error occurred, check log for detail", 400
-
