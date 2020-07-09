@@ -3,15 +3,15 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@api.route('/')
+@api.route('/', methods=['GET'])
 def home():
     logger.info("test log statement")
     logger.info("test log statement with extra props", 
         extra={'props': {"extra_property": 'extra_value'}}
         )
-    return "hello world"
+    return "hello world", 200
 
-@api.route('/exception')
+@api.route('/exception', methods=['GET'])
 def exception():
     try:
         raise RuntimeError
