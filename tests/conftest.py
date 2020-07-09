@@ -11,7 +11,6 @@ def _app():
 
     app_context.pop()
 
-
 @pytest.fixture()
 def client(_app):
     return _app.test_client()

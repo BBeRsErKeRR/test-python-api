@@ -1,5 +1,5 @@
 import logging
-import os
+# import os
 import sys
 from flask import Flask
 
@@ -11,19 +11,19 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler(sys.stdout))
 
 def init_app(app):
-    pass
+    logger.info("init_app")
 
 def configure_app(app, config_class, config_env_var=None):
-    pass
+    logger.info("configure_app")
 
 def register_blueprints(app):
     @app.route('/')
     def home():
         logger.info("test log statement")
-        logger.info("test log statement with extra props", extra={'props': {"extra_property": 'extra_value'}})
+        logger.info("test log statement with extra props", 
+            extra={'props': {"extra_property": 'extra_value'}})
         return "hello world"
 
-    
     @app.route('/exception')
     def exception():
         try:
@@ -32,7 +32,6 @@ def register_blueprints(app):
             logger.error("Error occurred", exc_info=e)
             logger.exception("Error occurred", exc_info=e)
         return "Error occurred, check log for detail"
-
 
 def create_app(config_class, config_env_var=None):
     app = Flask(__name__,
