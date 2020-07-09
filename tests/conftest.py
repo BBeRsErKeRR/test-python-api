@@ -1,6 +1,7 @@
 import pytest
 from app import create_app
 
+
 @pytest.yield_fixture(scope='session')
 def _app():
     _app = create_app(None, None)
@@ -10,6 +11,7 @@ def _app():
     yield _app
 
     app_context.pop()
+
 
 @pytest.fixture()
 def client(_app):
