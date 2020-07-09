@@ -21,7 +21,7 @@ def configure_app(app, config_class, config_env_var=None):
 
 
 def register_blueprints(app):
-    app.register_blueprint(api, url_prefix='api/')
+    app.register_blueprint(api, url_prefix='/api')
 
 
 def create_app(config_class, config_env_var=None):
