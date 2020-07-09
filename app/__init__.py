@@ -29,5 +29,4 @@ def create_app(config_class, config_env_var=None):
     init_app(app)
     configure_app(app, config_class, config_env_var)
     register_blueprints(app)
-
     return app
