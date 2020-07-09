@@ -6,7 +6,7 @@ clean-pyc:
 
 test:
 	pip install -r requirements/test.txt
-	python -B -m pytest --flake8 --cov-report=xml
+	python -B -m pytest -v --cov-report=xml --flake8
 	bandit --verbose --exclude tests --recursive
 
 build: clean-pyc
