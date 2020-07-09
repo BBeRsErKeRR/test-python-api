@@ -1,6 +1,9 @@
 
-class TestApi(object):
+from unittest import TestCase
+
+class TestApi(TestCase):
+
     def test_hello_world(self, client):
         res = client.get('/')
-        self.assertEqual(res.status_code, 200)
-        self.assertIn('hello world', str(res.data))
+        assert res.status_code == 200
+        assert 'hello world' in str(res.data)
