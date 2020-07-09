@@ -37,7 +37,6 @@ def register_blueprints(app):
 def create_app(config_class, config_env_var=None):
     app = Flask(__name__,
         instance_path=None,
-        create_instance_folder=False,
         instance_relative_config=False
     )
     init_app(app)
