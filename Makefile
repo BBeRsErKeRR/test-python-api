@@ -1,3 +1,5 @@
+VERSION := $(shell git rev-parse --abbrev-ref HEAD | sed -E 's/^.*?([0-9][.][0-9]+[.][0-9]+).*$$/\1/g')
+
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
@@ -7,7 +9,10 @@ clean-pyc:
 test:
 	pip install -r requirements/test.txt
 	python -B -m pytest -v --cov-report=xml --flake8
-	bandit --verbose --exclude tests --recursive .
+	bandit --verbose --exclude tests,.git,requirements --recursive .
 
 build: clean-pyc
-	docker build -t 'test-rest-api'
+	docker build test-rest-api:${VERSION}
+
+version:
+	@echo ${VERSION}
