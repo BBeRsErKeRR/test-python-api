@@ -2,9 +2,10 @@ import logging
 # import os
 import sys
 from flask import Flask
+from app.api.routes import api
 
 __version__ = "^__VERSION__^"
-__all__=['__version__']
+__all__ = ['__version__']
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -17,21 +18,7 @@ def configure_app(app, config_class, config_env_var=None):
     logger.info("configure_app")
 
 def register_blueprints(app):
-    @app.route('/')
-    def home():
-        logger.info("test log statement")
-        logger.info("test log statement with extra props", 
-            extra={'props': {"extra_property": 'extra_value'}})
-        return "hello world"
-
-    @app.route('/exception')
-    def exception():
-        try:
-            raise RuntimeError
-        except BaseException as e:
-            logger.error("Error occurred", exc_info=e)
-            logger.exception("Error occurred", exc_info=e)
-        return "Error occurred, check log for detail"
+    app.register_blueprint(api, url_prefix='/api')
 
 def create_app(config_class, config_env_var=None):
     app = Flask(__name__,
