@@ -7,12 +7,13 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 test:
-	pip install -r requirements/test.txt
+	pip install -U -r requirements/test.txt
 	python -B -m pytest -v --cov-report=xml --flake8
-	bandit --verbose --exclude tests,.git,requirements --recursive .
+	bandit --verbose --exclude tests,.git,requirements .
 
 build: clean-pyc
-	docker build test-rest-api:${VERSION}
+	grep -rlI '\^__VERSION__\^' ./ | xargs sed -i 's/\^__VERSION__\^/${VERSION}/g'
+	docker build -t test-rest-api:${VERSION} .
 
 version:
 	@echo ${VERSION}
