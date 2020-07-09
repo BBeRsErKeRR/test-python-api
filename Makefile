@@ -1,4 +1,5 @@
-VERSION := $(shell git rev-parse --abbrev-ref HEAD | sed -E 's/^.*?([0-9][.][0-9]+[.][0-9]+).*$$/\1/g')
+CURRENT_BRANCH = ${CURRENT_BRANCH:-HEAD}
+VERSION := $(shell git rev-parse --abbrev-ref $${CURRENT_BRANCH} | sed -E 's/^.*?([0-9][.][0-9]+[.][0-9]+).*$$/\1/g')
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
@@ -8,8 +9,8 @@ clean-pyc:
 
 test:
 	pip install -U -r requirements/test.txt
-	python -B -m pytest -v --cov-report=xml --flake8
-	bandit --verbose --exclude tests,.git,requirements .
+	python -B -m pytest -v --cov-report=html --cov-config=.coveragerc --flake8
+	bandit --verbose --exclude tests,.git,requirements -r ./*.py
 
 build: clean-pyc
 	grep -rlI '\^__VERSION__\^' ./ | xargs sed -i 's/\^__VERSION__\^/${VERSION}/g'
