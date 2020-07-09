@@ -1,7 +1,5 @@
 
-from unittest import TestCase
-
-class TestApi(TestCase):
+class TestApi(object):
 
     def test_hello_world(self, client):
         res = client.get('/')
