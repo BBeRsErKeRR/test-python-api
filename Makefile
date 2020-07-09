@@ -10,7 +10,7 @@ clean-pyc:
 test:
 	pip install -U -r requirements/test.txt
 	python -B -m pytest -v --cov-report=html --cov-config=.coveragerc --flake8
-	bandit --verbose --exclude tests,.git,requirements -r ./*.py
+	bandit --verbose --exclude tests,.git,requirements -r .
 
 build: clean-pyc
 	grep -rlI '\^__VERSION__\^' ./ | xargs sed -i 's/\^__VERSION__\^/${VERSION}/g'

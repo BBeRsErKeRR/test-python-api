@@ -1,0 +1,4 @@
+[bandit]
+# Skip import subprocess and assertion use
+skips: B101,B601
+

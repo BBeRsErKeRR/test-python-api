@@ -2,4 +2,4 @@
 coverage>=4.2
 pytest-cov
 pytest-flake8
-bandit
+bandit==1.6.2
