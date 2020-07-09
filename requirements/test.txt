@@ -1,4 +1,5 @@
 -r dev.txt
 coverage>=4.2
+pytest-cov
 pytest-flakes==4.0.0
 bandit==1.5.1
